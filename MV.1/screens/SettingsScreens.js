@@ -17,7 +17,7 @@ const App = () => {
     const [editing, setEditing] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
 
-    const serverUrl = 'http://192.168.224.119:3000';
+    const serverUrl = 'http://192.168.1.7:3000';
 
 
     const fetchClientes = async () => {

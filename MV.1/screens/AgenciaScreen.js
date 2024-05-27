@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, Alert } from 'react-native';
 import axios from 'axios';
 
-const serverUrl = 'http://192.168.224.119:3000'; // Tu IP local
+const serverUrl = 'http://192.168.1.7:3000'; // Tu IP local
 
 const AgenciaScreen = () => {
     const [selectedSede, setSelectedSede] = useState(null);
