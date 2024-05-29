@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, Alert } from 'react-native';
 import axios from 'axios';
 
-const serverUrl = 'http://192.168.137.1:3000'; // Tu IP local
+const serverUrl = 'http://192.168.0.105:3000'; // Tu IP local
 
 const AgenciaScreen = () => {
     const [selectedSede, setSelectedSede] = useState(null);
@@ -30,6 +30,7 @@ const AgenciaScreen = () => {
             Alert.alert('Éxito', 'Agencia creada correctamente');
             setForm({ nombre: '', calle: '', numero: '', poblacion: '' });
             fetchSedes();
+            setView('list');
         } catch (error) {
             Alert.alert('Error', 'No se pudo crear la agencia');
             console.error(error);
@@ -45,6 +46,7 @@ const AgenciaScreen = () => {
             setSelectedSede(null);
             setForm({ nombre: '', calle: '', numero: '', poblacion: '' });
             fetchSedes();
+            setView('list');
         } catch (error) {
             Alert.alert('Error', 'No se pudo actualizar la agencia');
             console.error(error);
@@ -59,6 +61,7 @@ const AgenciaScreen = () => {
             Alert.alert('Éxito', 'Agencia eliminada correctamente');
             setSelectedSede(null);
             fetchSedes();
+            setView('list');
         } catch (error) {
             Alert.alert('Error', 'No se pudo eliminar la agencia');
             console.error(error);
@@ -119,7 +122,7 @@ const AgenciaScreen = () => {
                     </View>
                 </TouchableOpacity>
             )}
-            ListEmptyComponent={<Text style={styles.noSedeText}>No se ha seleccionado ninguna Agencia</Text>}
+            ListEmptyComponent={<Text style={styles.noSedeText}>No hay agencias registradas</Text>}
         />
     );
 
