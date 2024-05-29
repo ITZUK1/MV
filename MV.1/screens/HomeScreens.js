@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, ScrollView, StyleSheet, Image } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
 
 const motos = [
   { 
@@ -14,7 +15,13 @@ const motos = [
     imagen: require('./img/rodo-1.png'),
     descripcion: 'RODO 1   CALLE 45 #5D ESTE  TELEFONO: +568128371389  PERSONA ENCARGADA:JAVIER DIAS DE ATENCION:DE LUNEAS A JUEVES 4 PM A 6 PM '
   },
-  
+];
+
+const parqueaderos = [
+  { latitude: 4.480180, longitude: -74.124700, title: 'Parqueadero Usme 1', description: 'Parqueadero en la zona de Usme' },
+  { latitude: 4.482810, longitude: -74.126270, title: 'Parqueadero Usme 2', description: 'Parqueadero en la zona de Usme' },
+  { latitude: 4.484300, longitude: -74.128120, title: 'Parqueadero Usme 3', description: 'Parqueadero en la zona de Usme' },
+  { latitude: 4.478870, longitude: -74.122490, title: 'Parqueadero Usme 4', description: 'Parqueadero en la zona de Usme' },
 ];
 
 const Home = () => {
@@ -40,6 +47,26 @@ const Home = () => {
           <Text style={styles.cardDescription}>{moto.descripcion}</Text>
         </View>
       ))}
+
+      <Text style={styles.sectionTitle}>Ubicación</Text>
+      <MapView
+        style={styles.map}
+        initialRegion={{
+          latitude: 4.481680,  // Coordenadas centrales de Usme, Bogotá
+          longitude: -74.124230,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
+        }}
+      >
+        {parqueaderos.map((parqueadero, index) => (
+          <Marker
+            key={index}
+            coordinate={{ latitude: parqueadero.latitude, longitude: parqueadero.longitude }}
+            title={parqueadero.title}
+            description={parqueadero.description}
+          />
+        ))}
+      </MapView>
     </ScrollView>
   );
 };
@@ -101,14 +128,20 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     width: '100%',
-    height: 200, // Ajusta la altura según tus necesidades
-    resizeMode: 'cover', // O ajusta según el comportamiento deseado
+    height: 200,
+    resizeMode: 'cover',
     borderRadius: 10,
     marginBottom: 10,
   },
   cardDescription: {
     fontSize: 16,
     color: '#555',
+  },
+  map: {
+    width: '100%',
+    height: 300,
+    borderRadius: 10,
+    marginVertical: 20,
   },
 });
 
