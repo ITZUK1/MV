@@ -18,7 +18,7 @@ const App = () => {
     const [selectedId, setSelectedId] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
 
-    const serverUrl = 'http://192.168.0.105:3000';
+    const serverUrl = 'http://192.168.1.6:3000';
 
     const fetchClientes = async () => {
         try {
