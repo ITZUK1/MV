@@ -1,4 +1,3 @@
-// useAgencias.js
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Alert } from 'react-native';
@@ -17,7 +16,7 @@ export const useAgencias = () => {
 
     const fetchSedes = async () => {
         try {
-            const response = await axios.get(`${serverUrl}/agencias`);
+            const response = await axios.get(`${serverUrl}/agencia`);
             setSedes(response.data);
         } catch (error) {
             console.error(error);

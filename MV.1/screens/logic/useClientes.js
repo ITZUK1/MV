@@ -23,7 +23,7 @@ export const useClientes = () => {
 
     const fetchClientes = async () => {
         try {
-            const response = await axios.get(`${serverUrl}/clientes`);
+            const response = await axios.get(`${serverUrl}/cliente`);
             setClientes(response.data);
         } catch (error) {
             console.error('Network Error:', error);
