@@ -16,26 +16,42 @@ function MyTabs() {
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
-                    if (route.name === 'Home') {
-                        iconName = focused ? 'home' : 'home-outline';
-                    } else if (route.name === 'usuario') {
-                        iconName = focused ? 'person' : 'person-outline';
-                    } else if (route.name === 'Agencia') {
-                        iconName = focused ? 'business' : 'business-outline';
-                    } else if (route.name === 'Reserva') {
-                        iconName = focused ? 'calendar' : 'calendar-outline';
+                    switch (route.name) {
+                        case 'Home':
+                            iconName = focused ? 'home' : 'home-outline';
+                            break;
+                        case 'Usuario':
+                            iconName = focused ? 'person' : 'person-outline';
+                            break;
+                        case 'Agencia':
+                            iconName = focused ? 'business' : 'business-outline';
+                            break;
+                        case 'Reserva':
+                            iconName = focused ? 'calendar' : 'calendar-outline';
+                            break;
+                        default:
+                            iconName = 'help-circle-outline';
                     }
                     return <Ionicons name={iconName} size={size} color={color} />;
                 },
-                tabBarActiveTintColor: 'blue',
+                tabBarActiveTintColor: '#007BFF',
                 tabBarInactiveTintColor: 'gray',
-                tabBarStyle: [{ display: 'flex' }]
+                tabBarStyle: {
+                    backgroundColor: '#f8f9fa',
+                    paddingBottom: 5,
+                    paddingTop: 5,
+                    height: 60,
+                },
+                tabBarLabelStyle: {
+                    fontSize: 12,
+                    marginBottom: 5,
+                }
             })}
         >
-            <Tab.Screen name="Home" component={HomeScreens} />
-            <Tab.Screen name="usuario" component={SettingsScreens} />
-            <Tab.Screen name="Agencia" component={AgenciaScreens} />
-            <Tab.Screen name="Reserva" component={ReservaScreens} />
+            <Tab.Screen name="Home" component={HomeScreens} options={{ tabBarLabel: 'Inicio' }} />
+            <Tab.Screen name="Usuario" component={SettingsScreens} options={{ tabBarLabel: 'Usuario' }} />
+            <Tab.Screen name="Agencia" component={AgenciaScreens} options={{ tabBarLabel: 'Agencia' }} />
+            <Tab.Screen name="Reserva" component={ReservaScreens} options={{ tabBarLabel: 'Reservas' }} />
         </Tab.Navigator>
     );
 }

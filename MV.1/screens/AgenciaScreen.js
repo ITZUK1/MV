@@ -1,6 +1,5 @@
-// AgenciaScreen.js
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, Alert } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList } from 'react-native';
 import { useAgencias } from '../screens/logic/useAgencias';
 
 const AgenciaScreen = () => {
@@ -69,6 +68,7 @@ const AgenciaScreen = () => {
                 }}>
                     <View style={styles.sedeItem}>
                         <Text style={styles.sedeName}>{item.nombre}</Text>
+                        <Text style={styles.sedeDetails}>{item.calle}, {item.numero}, {item.poblacion}</Text>
                     </View>
                 </TouchableOpacity>
             )}
@@ -78,29 +78,29 @@ const AgenciaScreen = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>SEDES</Text>
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity style={[styles.button, view === 'form' && styles.activeButton]} onPress={() => setView('form')}>
-                    <Text style={styles.buttonText}>Registrar Agencia</Text>
+            <Text style={styles.header}>Sedes</Text>
+            <View style={styles.navButtonContainer}>
+                <TouchableOpacity style={[styles.navButton, view === 'form' && styles.activeNavButton]} onPress={() => setView('form')}>
+                    <Text style={styles.navButtonText}>Registrar Agencia</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.button, view === 'list' && styles.activeButton]} onPress={() => setView('list')}>
-                    <Text style={styles.buttonText}>Ver Agencias</Text>
+                <TouchableOpacity style={[styles.navButton, view === 'list' && styles.activeNavButton]} onPress={() => setView('list')}>
+                    <Text style={styles.navButtonText}>Ver Agencias</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={fetchSedes}>
-                    <Text style={styles.buttonText}>Actualizar Lista</Text>
+                <TouchableOpacity style={styles.navButton} onPress={fetchSedes}>
+                    <Text style={styles.navButtonText}>Actualizar Lista</Text>
                 </TouchableOpacity>
             </View>
             {view === 'form' ? renderForm() : renderList()}
             {selectedSede && view === 'form' && (
                 <View style={styles.sedeInfoContainer}>
-                    <Text style={styles.label}>Nombre:</Text>
-                    <Text style={styles.text}>{selectedSede.nombre}</Text>
-                    <Text style={styles.label}>Dirección:</Text>
-                    <Text style={styles.text}>{selectedSede.calle}</Text>
-                    <Text style={styles.label}>Número:</Text>
-                    <Text style={styles.text}>{selectedSede.numero}</Text>
-                    <Text style={styles.label}>Población:</Text>
-                    <Text style={styles.text}>{selectedSede.poblacion}</Text>
+                    <Text style={styles.infoLabel}>Nombre:</Text>
+                    <Text style={styles.infoText}>{selectedSede.nombre}</Text>
+                    <Text style={styles.infoLabel}>Dirección:</Text>
+                    <Text style={styles.infoText}>{selectedSede.calle}</Text>
+                    <Text style={styles.infoLabel}>Número:</Text>
+                    <Text style={styles.infoText}>{selectedSede.numero}</Text>
+                    <Text style={styles.infoLabel}>Población:</Text>
+                    <Text style={styles.infoText}>{selectedSede.poblacion}</Text>
                 </View>
             )}
         </View>
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: '#f9f9f9',
+        backgroundColor: '#f0f0f5',
         paddingHorizontal: 20,
     },
     header: {
@@ -124,11 +124,27 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         textAlign: 'center',
     },
-    buttonContainer: {
+    navButtonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '100%',
         marginBottom: 20,
+    },
+    navButton: {
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center',
+        flex: 1,
+        marginHorizontal: 5,
+        backgroundColor: '#3498db',
+    },
+    activeNavButton: {
+        backgroundColor: '#2980b9',
+    },
+    navButtonText: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 16,
     },
     formContainer: {
         width: '100%',
@@ -136,11 +152,16 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        borderColor: '#ccc',
+        borderColor: '#bdc3c7',
         borderWidth: 1,
         borderRadius: 5,
         paddingHorizontal: 10,
         marginBottom: 10,
+        backgroundColor: '#ecf0f1',
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     button: {
         padding: 10,
@@ -148,16 +169,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         marginHorizontal: 5,
-        backgroundColor: '#007BFF',
     },
     confirmButton: {
-        backgroundColor: '#007BFF',
-    },
-    activeButton: {
-        backgroundColor: '#0056b3',
+        backgroundColor: '#2ecc71',
     },
     deleteButton: {
-        backgroundColor: '#FF0000',
+        backgroundColor: '#e74c3c',
     },
     buttonText: {
         color: '#fff',
@@ -166,13 +183,14 @@ const styles = StyleSheet.create({
     },
     sedeInfoContainer: {
         alignItems: 'center',
+        marginTop: 20,
     },
-    label: {
+    infoLabel: {
         fontSize: 16,
         fontWeight: 'bold',
         color: '#555',
     },
-    text: {
+    infoText: {
         fontSize: 14,
         color: '#666',
         marginBottom: 10,
@@ -180,15 +198,28 @@ const styles = StyleSheet.create({
     noSedeText: {
         fontSize: 18,
         color: '#666',
+        textAlign: 'center',
+        marginTop: 20,
     },
     sedeItem: {
-        padding: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
+        padding: 15,
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        marginBottom: 10,
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 5,
+        elevation: 3,
     },
     sedeName: {
-        fontSize: 16,
+        fontSize: 18,
+        fontWeight: 'bold',
         color: '#333',
+    },
+    sedeDetails: {
+        fontSize: 14,
+        color: '#7f8c8d',
     },
 });
 
