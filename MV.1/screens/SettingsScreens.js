@@ -1,6 +1,6 @@
-// App.js
 import React from 'react';
 import { View, Text, TextInput, Button, StyleSheet, FlatList, TouchableOpacity, Modal } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import { useClientes } from '../screens/logic/useClientes';
 
 const App = () => {
@@ -69,7 +69,7 @@ const App = () => {
                         <Text style={styles.modalHeading}>{editing ? "Editar Cliente" : "Añadir Cliente"}</Text>
                         <TextInput
                             style={styles.input}
-                            placeholder="DNI"
+                            placeholder="Cedula"
                             value={form.dni}
                             onChangeText={(text) => handleChange('dni', text)}
                         />
@@ -103,15 +103,18 @@ const App = () => {
                             value={form.numero}
                             onChangeText={(text) => handleChange('numero', text)}
                         />
+                        <Picker
+                            selectedValue={form.id_ciudad}
+                            style={styles.picker}
+                            onValueChange={(itemValue) => handleChange('id_ciudad', itemValue)}
+                        >
+                            <Picker.Item label="Seleccione una ciudad" value="" />
+                            <Picker.Item label="Bogotá" value="1" />
+                            <Picker.Item label="Cali" value="2" />
+                        </Picker>
                         <TextInput
                             style={styles.input}
-                            placeholder="ID Ciudad"
-                            value={form.id_ciudad}
-                            onChangeText={(text) => handleChange('id_ciudad', text)}
-                        />
-                        <TextInput
-                            style={styles.input}
-                            placeholder="contraseña"
+                            placeholder="Teléfono"
                             value={form.telefono}
                             onChangeText={(text) => handleChange('telefono', text)}
                         />
@@ -196,6 +199,11 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 20,
+    },
+    picker: {
+        height: 50,
+        width: '100%',
+        marginBottom: 10,
     },
 });
 
