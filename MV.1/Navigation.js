@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons';
 
 import HomeScreens from "./screens/HomeScreens";
-import SettingsScreens from "./screens/SettingsScreens";
+import UsuarioScreens from "./screens/UsuarioScreens";
 import AgenciaScreens from "./screens/AgenciaScreen";
 import ReservaScreens from "./screens/reserva";
 
@@ -49,7 +49,7 @@ function MyTabs() {
             })}
         >
             <Tab.Screen name="Home" component={HomeScreens} options={{ tabBarLabel: 'Inicio' }} />
-            <Tab.Screen name="Usuario" component={SettingsScreens} options={{ tabBarLabel: 'Usuario' }} />
+            <Tab.Screen name="Usuario" component={UsuarioScreens} options={{ tabBarLabel: 'Usuario' }} />
             <Tab.Screen name="Agencia" component={AgenciaScreens} options={{ tabBarLabel: 'Agencia' }} />
             <Tab.Screen name="Reserva" component={ReservaScreens} options={{ tabBarLabel: 'Reservas' }} />
         </Tab.Navigator>
