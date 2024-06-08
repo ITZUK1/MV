@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Alert } from 'react-native';
 
-const serverUrl = 'http://192.168.157.119:3000'; // Tu IP local
+const serverUrl = 'http://192.168.1.6:3000'; // Tu IP local
 
 export const useAgencias = () => {
     const [selectedSede, setSelectedSede] = useState(null);
