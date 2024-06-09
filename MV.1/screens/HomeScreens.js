@@ -2,49 +2,48 @@ import React from 'react';
 import { View, Text, ScrollView, StyleSheet, Image } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
-const motos = [
+const parqueaderos = [
   { 
-    imagen: require('./img/duke.webp'),
-    descripcion: 'La KTM Duke 200 es una motocicleta de estilo naked, reconocida por su agilidad, rendimiento y diseño deportivo.'
+    imagen: require('./img/bomber.jpg'),
+    descripcion: 'Parqueadero Usme 1 - Ubicado en la Calle 45 #5D Este. Teléfono: +571234567890. Horario: Lunes a Jueves de 4 PM a 6 PM.'
   },
   { 
-    imagen: require('./img/enduro.jpg'),
-    descripcion: 'La KTM Enduro 690 es una motocicleta diseñada específicamente para aventuras off-road y enduro. Es parte de la línea de motocicletas off-road de KTM, conocida por su rendimiento excepcional en terrenos difíciles y su durabilidad '
+    imagen: require('./img/bomber.jpg'),
+    descripcion: 'Parqueadero Usme 2 - Ubicado en la Calle 50 #7E Este. Teléfono: +571098765432. Horario: Viernes a Domingo de 2 PM a 5 PM.'
   },
   { 
-    imagen: require('./img/rodo-1.png'),
-    descripcion: 'RODO 1   CALLE 45 #5D ESTE  TELEFONO: +568128371389  PERSONA ENCARGADA:JAVIER DIAS DE ATENCION:DE LUNEAS A JUEVES 4 PM A 6 PM '
+    imagen: require('./img/bomber.jpg'),
+    descripcion: 'Parqueadero Usme 3 - Ubicado en la Calle 55 #10F Este. Teléfono: +571112233445. Horario: Lunes a Viernes de 8 AM a 12 PM.'
   },
 ];
 
-const parqueaderos = [
-  { latitude: 4.480180, longitude: -74.124700, title: 'Parqueadero Usme 1', description: 'Parqueadero en la zona de Usme' },
-  { latitude: 4.482810, longitude: -74.126270, title: 'Parqueadero Usme 2', description: 'Parqueadero en la zona de Usme' },
-  { latitude: 4.484300, longitude: -74.128120, title: 'Parqueadero Usme 3', description: 'Parqueadero en la zona de Usme' },
-  { latitude: 4.478870, longitude: -74.122490, title: 'Parqueadero Usme 4', description: 'Parqueadero en la zona de Usme' },
+const ubicacionesParqueaderos = [
+  { latitude: 4.480180, longitude: -74.124700, title: 'Parqueadero Usme 1', description: 'Parqueadero en la Calle 45 #5D Este.' },
+  { latitude: 4.482810, longitude: -74.126270, title: 'Parqueadero Usme 2', description: 'Parqueadero en la Calle 50 #7E Este.' },
+  { latitude: 4.484300, longitude: -74.128120, title: 'Parqueadero Usme 3', description: 'Parqueadero en la Calle 55 #10F Este.' },
+  { latitude: 4.478870, longitude: -74.122490, title: 'Parqueadero Usme 4', description: 'Parqueadero en la Calle 40 #3G Este.' },
 ];
 
 const Home = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.welcome}>Bienvenido a MotoRent</Text>
+        <Text style={styles.welcome}>Bienvenido a PARKI ANDO</Text>
         <Text style={styles.intro}>
-          Gestiona tus reservas de alquiler de motocicletas de competición con nuestra aplicación.
+          Gestiona tus reservas de parqueaderos en la zona de Usme, Bogotá, con nuestra aplicación.
         </Text>
       </View>
       
       <Text style={styles.sectionTitle}>Nuestra Empresa</Text>
       <Text style={styles.text}>
-        MotoRent es líder en el alquiler de motocicletas de competición. Ofrecemos una amplia gama de motos de alta gama, 
-        almacenadas en garajes propios y gestionadas por agencias especializadas.
+        Parki Ando es líder en la gestión de reservas de parqueaderos en Usme. Ofrecemos una variedad de opciones de parqueo seguras y accesibles, gestionadas por personal especializado.
       </Text>
 
-      <Text style={styles.sectionTitle}>Información de Motos</Text>
-      {motos.map((moto, index) => (
+      <Text style={styles.sectionTitle}>Información de Parqueaderos</Text>
+      {parqueaderos.map((parqueadero, index) => (
         <View key={index} style={styles.card}>
-          <Image source={moto.imagen} style={styles.cardImage} />
-          <Text style={styles.cardDescription}>{moto.descripcion}</Text>
+          <Image source={parqueadero.imagen} style={styles.cardImage} />
+          <Text style={styles.cardDescription}>{parqueadero.descripcion}</Text>
         </View>
       ))}
 
@@ -58,7 +57,7 @@ const Home = () => {
           longitudeDelta: 0.01,
         }}
       >
-        {parqueaderos.map((parqueadero, index) => (
+        {ubicacionesParqueaderos.map((parqueadero, index) => (
           <Marker
             key={index}
             coordinate={{ latitude: parqueadero.latitude, longitude: parqueadero.longitude }}
