@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, ScrollView, Modal as NativeModal, Button } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, ScrollView, Button } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import RNModal from 'react-native-modal';
 
 const MotoScreen = () => {
-  const [searchInput, setSearchInput] = useState('');
-  const [selectedMoto, setSelectedMoto] = useState(null);
-  const [reservedMoto, setReservedMoto] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedParqueadero, setSelectedParqueadero] = useState(null);
   const [fechaInicio, setFechaInicio] = useState(new Date().toISOString().split('T')[0]);
-  const [vehiculoType, setVehiculoType] = useState('Moto'); // Nuevo estado para el tipo de vehículo
 
   const parqueaderos = [
     { id: 1, latitude: 4.480180, longitude: -74.124700, title: 'Parqueadero Usme 1', description: 'Parqueadero en la zona de Usme' },
@@ -19,43 +15,23 @@ const MotoScreen = () => {
     { id: 4, latitude: 4.478870, longitude: -74.122490, title: 'Parqueadero Usme 4', description: 'Parqueadero en la zona de Usme' },
   ];
 
-  const vehiculos = [
-    {
-      nombre: 'Duke',
-      descripcion: 'Moto naked de alta velocidad y gran potencia, diseñada para carreras y conducción deportiva.',
-      foto: require('./img/duke.webp'),
-      placa: 'ABC123',
-      matricula: 'DUK123',
-      bastidor: 'BAS001',
-      color: 'Naranja',
-      marca: 'KTM',
-      modelo: '2023',
-      id_garaje: 'G001',
-      fecha_estacionamiento: '2024-05-01',
-      id_agencia: 'A001',
-      tipo: 'Moto' // Nuevo campo para indicar el tipo de vehículo
-    },
-    // Añade más vehículos aquí
-  ];
-
   const handleMarkerPress = (parqueadero) => {
     setSelectedParqueadero(parqueadero);
     setModalVisible(true);
   };
 
   const handleReserva = () => {
-    // Lógica para manejar la reserva
     Alert.alert('Reserva creada', 'La reserva ha sido creada satisfactoriamente.');
     setModalVisible(false);
   };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.header}>¡Reserva tu nueva aventura!</Text>
+      <Text style={styles.header}>Reserva tu nueva aventura</Text>
       
       <MapView
         style={styles.map}
-        provider={PROVIDER_GOOGLE} // Usar proveedor de Google Maps
+        provider={PROVIDER_GOOGLE}
         initialRegion={{
           latitude: 4.481680,
           longitude: -74.124230,
@@ -102,17 +78,16 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   header: {
-    fontSize: 28,
+    fontSize: 20, // Reducido el tamaño del encabezado
     fontWeight: 'bold',
-    marginTop: 40,
-    marginBottom: 20,
+    marginTop: 20,
+    marginBottom: 10,
     color: '#333',
-    textTransform: 'uppercase',
     textAlign: 'center',
   },
   map: {
     width: '100%',
-    height: 300,
+    height: 500, // Aumentado el tamaño del mapa
     borderRadius: 10,
     marginVertical: 20,
   },

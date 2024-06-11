@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, FlatList, TouchableOpacity, Modal } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useClientes } from '../screens/logic/useClientes';
@@ -18,6 +18,21 @@ const App = () => {
         setEditing,
     } = useClientes();
 
+    const [perfilVisible, setPerfilVisible] = useState(false);
+    const [selectedCliente, setSelectedCliente] = useState(null);
+
+    const handleSaveCliente = () => {
+        handleSave();
+        setModalVisible(false);
+        setPerfilVisible(true);
+        setSelectedCliente(form);
+    };
+
+    const handleViewProfile = (cliente) => {
+        setSelectedCliente(cliente);
+        setPerfilVisible(true);
+    };
+
     return (
         <View style={styles.container}>
             <Text style={styles.heading}>REGISTRO</Text>
@@ -36,6 +51,7 @@ const App = () => {
                     });
                     setEditing(false);
                     setModalVisible(true);
+                    setPerfilVisible(false);
                 }}
             >
                 <Text style={styles.addButtonText}>Añadir Cliente</Text>
@@ -50,12 +66,23 @@ const App = () => {
                         <Text>{item.calle}, {item.numero}</Text>
                         <Text>{item.telefono}</Text>
                         <View style={styles.buttonContainer}>
+                            <Button title="Perfil" onPress={() => handleViewProfile(item)} />
                             <Button title="Editar" onPress={() => handleEdit(item)} />
                             <Button title="Eliminar" onPress={() => handleDelete(item.id_cliente)} />
                         </View>
                     </View>
                 )}
             />
+            {perfilVisible && selectedCliente && (
+                <View style={styles.perfil}>
+                    <Text style={styles.perfilHeading}>Perfil del Cliente</Text>
+                    <Text><Text style={styles.perfilLabel}>Nombre:</Text> {selectedCliente.nombre} {selectedCliente.primer_apellido} {selectedCliente.segundo_apellido}</Text>
+                    <Text><Text style={styles.perfilLabel}>Cédula:</Text> {selectedCliente.dni}</Text>
+                    <Text><Text style={styles.perfilLabel}>Dirección:</Text> {selectedCliente.calle}, {selectedCliente.numero}</Text>
+                    <Text><Text style={styles.perfilLabel}>Teléfono:</Text> {selectedCliente.telefono}</Text>
+                    <Button title="Cerrar Perfil" onPress={() => setPerfilVisible(false)} />
+                </View>
+            )}
             <Modal
                 animationType="slide"
                 transparent={true}
@@ -69,7 +96,7 @@ const App = () => {
                         <Text style={styles.modalHeading}>{editing ? "Editar Cliente" : "Añadir Cliente"}</Text>
                         <TextInput
                             style={styles.input}
-                            placeholder="Cedula"
+                            placeholder="Cédula"
                             value={form.dni}
                             onChangeText={(text) => handleChange('dni', text)}
                         />
@@ -114,13 +141,13 @@ const App = () => {
                         </Picker>
                         <TextInput
                             style={styles.input}
-                            placeholder="contraseña"
+                            placeholder="Teléfono"
                             value={form.telefono}
                             onChangeText={(text) => handleChange('telefono', text)}
                         />
                         <Button
                             title={editing ? "Actualizar Cliente" : "Guardar Cliente"}
-                            onPress={handleSave}
+                            onPress={handleSaveCliente}
                         />
                         <Button
                             title="Cancelar"
@@ -138,11 +165,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
+        backgroundColor: '#f5f5f5',
     },
     heading: {
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 20,
+        textAlign: 'center',
+        color: '#333',
     },
     input: {
         borderWidth: 1,
@@ -160,12 +190,19 @@ const styles = StyleSheet.create({
     },
     cliente: {
         padding: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        marginBottom: 10,
+        elevation: 3,  // Adds shadow for Android
+        shadowColor: '#000',  // Adds shadow for iOS
+        shadowOffset: { width: 0, height: 2 },  // Adds shadow for iOS
+        shadowOpacity: 0.1,  // Adds shadow for iOS
+        shadowRadius: 1,  // Adds shadow for iOS
     },
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        marginTop: 10,
     },
     addButton: {
         backgroundColor: '#007bff',
@@ -177,6 +214,26 @@ const styles = StyleSheet.create({
     addButtonText: {
         color: '#fff',
         fontSize: 16,
+    },
+    perfil: {
+        padding: 20,
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        elevation: 5,  // Adds shadow for Android
+        shadowColor: '#000',  // Adds shadow for iOS
+        shadowOffset: { width: 0, height: 2 },  // Adds shadow for iOS
+        shadowOpacity: 0.2,  // Adds shadow for iOS
+        shadowRadius: 2,  // Adds shadow for iOS
+        marginVertical: 10,
+    },
+    perfilHeading: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        textAlign: 'center',
+    },
+    perfilLabel: {
+        fontWeight: 'bold',
     },
     modalOverlay: {
         flex: 1,
