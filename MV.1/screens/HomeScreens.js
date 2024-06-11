@@ -4,7 +4,7 @@ import MapView, { Marker } from 'react-native-maps';
 
 const parqueaderos = [
   { 
-    imagen: require('./img/bomber.jpg'),
+    imagen: require('./img/paqueadero1.jpg'),
     descripcion: 'Parqueadero el uval 1 - Ubicado en la Calle 45 #5D Este. Teléfono: +571234567890. Horario: Lunes a Jueves de 4 PM a 6 PM.'
   },
   { 
