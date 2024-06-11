@@ -8,13 +8,10 @@ const parqueaderos = [
     descripcion: 'Parqueadero carros y motos - Ubicado en la Calle 76sur 1262 barrio Andrea. Teléfono: +573115510800. Administrador: Adriana gilen  Horario: Lunes a domingo de 5:30 am a 9:30 PM.'
   },
   { 
-    imagen: require('./img/bomber.jpg'),
-    descripcion: 'Parqueadero Usme 2 - Ubicado en la Calle 50 #7E Este. Teléfono: +571098765432. Horario: Viernes a Domingo de 2 PM a 5 PM.'
+    imagen: require('./img/parqueadero2.jpg'),
+    descripcion: 'Parqueadero junior  - Ubicado en la calle 84 sur no 14-55. Teléfono: +573006929521. Horario: 24/7'
   },
-  { 
-    imagen: require('./img/bomber.jpg'),
-    descripcion: 'Parqueadero Usme 3 - Ubicado en la Calle 55 #10F Este. Teléfono: +571112233445. Horario: Lunes a Viernes de 8 AM a 12 PM.'
-  },
+  
 ];
 
 const ubicacionesParqueaderos = [
