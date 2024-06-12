@@ -81,3 +81,6 @@ CREATE TABLE Reserva (
     FOREIGN KEY (matricula_moto) REFERENCES Motocicleta(matricula),
     FOREIGN KEY (id_agencia) REFERENCES Agencia(id_agencia)
 );
+
+use motocompeticion;
+ALTER TABLE Cliente CHANGE COLUMN telefono contraseña VARCHAR(255) NOT NULL;
