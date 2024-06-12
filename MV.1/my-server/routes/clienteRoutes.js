@@ -4,7 +4,7 @@ const db = require('../config/db');
 const ensureCityExists = require('../helpers/ensureCityExists');
 
 router.post('/', (req, res) => {
-    let { dni, nombre, primer_apellido, segundo_apellido, calle, numero, id_ciudad, telefono } = req.body;
+    let { dni, nombre, primer_apellido, segundo_apellido, calle, numero, id_ciudad, contraseña } = req.body;
 
     primer_apellido = primer_apellido || '';
 
@@ -13,8 +13,8 @@ router.post('/', (req, res) => {
             return res.status(500).send(err);
         }
 
-        const sql = 'INSERT INTO Cliente (dni, nombre, primer_apellido, segundo_apellido, calle, numero, id_ciudad, telefono) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-        db.query(sql, [dni, nombre, primer_apellido, segundo_apellido, calle, numero, id_ciudad, telefono], (err, result) => {
+        const sql = 'INSERT INTO Cliente (dni, nombre, primer_apellido, segundo_apellido, calle, numero, id_ciudad, contraseña) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+        db.query(sql, [dni, nombre, primer_apellido, segundo_apellido, calle, numero, id_ciudad, contraseña], (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
@@ -49,7 +49,7 @@ router.get('/:id', (req, res) => {
 
 router.put('/:id', (req, res) => {
     const { id } = req.params;
-    let { dni, nombre, primer_apellido, segundo_apellido, calle, numero, id_ciudad, telefono } = req.body;
+    let { dni, nombre, primer_apellido, segundo_apellido, calle, numero, id_ciudad, contraseña } = req.body;
 
     primer_apellido = primer_apellido || '';
 
@@ -58,8 +58,8 @@ router.put('/:id', (req, res) => {
             return res.status(500).send(err);
         }
 
-        const sql = 'UPDATE Cliente SET dni = ?, nombre = ?, primer_apellido = ?, segundo_apellido = ?, calle = ?, numero = ?, id_ciudad = ?, telefono = ? WHERE id_cliente = ?';
-        db.query(sql, [dni, nombre, primer_apellido, segundo_apellido, calle, numero, id_ciudad, telefono, id], (err, result) => {
+        const sql = 'UPDATE Cliente SET dni = ?, nombre = ?, primer_apellido = ?, segundo_apellido = ?, calle = ?, numero = ?, id_ciudad = ?, contraseña = ? WHERE id_cliente = ?';
+        db.query(sql, [dni, nombre, primer_apellido, segundo_apellido, calle, numero, id_ciudad, contraseña, id], (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }

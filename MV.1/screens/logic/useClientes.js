@@ -1,4 +1,3 @@
-// useClientes.js
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Alert } from 'react-native';
@@ -15,7 +14,7 @@ export const useClientes = () => {
         calle: '',
         numero: '',
         id_ciudad: '',
-        telefono: '',
+        contraseña: '',
     });
     const [editing, setEditing] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
@@ -58,7 +57,7 @@ export const useClientes = () => {
                 calle: '',
                 numero: '',
                 id_ciudad: '',
-                telefono: '',
+                contraseña: '',
             });
             setEditing(false);
             setSelectedId(null);
