@@ -141,7 +141,7 @@ const App = () => {
                         </Picker>
                         <TextInput
                             style={styles.input}
-                            placeholder="Teléfono"
+                            placeholder="contraseña"
                             value={form.telefono}
                             onChangeText={(text) => handleChange('telefono', text)}
                         />
