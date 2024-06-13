@@ -66,21 +66,16 @@ CREATE TABLE Cliente (
     FOREIGN KEY (id_ciudad) REFERENCES Ciudad(id_ciudad)
 );
 
--- Tabla de Reservas
 CREATE TABLE Reserva (
     id_reserva INT AUTO_INCREMENT PRIMARY KEY,
     id_cliente INT,
-    matricula_moto VARCHAR(15),
-    id_agencia INT,
-    precio DECIMAL(10, 2) NOT NULL,
-    pagado BOOLEAN NOT NULL,
-    fecha_inicio DATE NOT NULL,
-    fecha_fin DATE NOT NULL,
-    fecha_reserva DATE NOT NULL,
-    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente),
-    FOREIGN KEY (matricula_moto) REFERENCES Motocicleta(matricula),
-    FOREIGN KEY (id_agencia) REFERENCES Agencia(id_agencia)
+    matricula_vehiculo VARCHAR(15),
+    nombre_parking VARCHAR(255),
+    fecha_inicio DATETIME NOT NULL,
+    fecha_fin DATETIME NOT NULL,
+    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente)
 );
+
 
 use motocompeticion;
 ALTER TABLE Cliente CHANGE COLUMN telefono contraseña VARCHAR(255) NOT NULL;
