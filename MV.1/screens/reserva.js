@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, ScrollView, Button } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, ScrollView, Button, ImageBackground } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import RNModal from 'react-native-modal';
 import * as Location from 'expo-location';
@@ -56,70 +56,75 @@ const MotoScreen = () => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.header}>Reserva tu nueva aventura</Text>
+    <ImageBackground source={require('./img/morado.jpg')} style={styles.backgroundImage}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.header}>Reserva tu nueva aventura</Text>
 
-      {userLocation && (
-        <MapView
-          style={styles.map}
-          provider={PROVIDER_GOOGLE}
-          initialRegion={{
-            latitude: userLocation.latitude,
-            longitude: userLocation.longitude,
-            latitudeDelta: 0.02,
-            longitudeDelta: 0.02,
-          }}
-        >
-          <Marker
-            coordinate={{ latitude: userLocation.latitude, longitude: userLocation.longitude }}
-            title="Tu ubicación"
-            pinColor="blue"
-          />
-          {parqueaderos.map((parqueadero) => (
+        {userLocation && (
+          <MapView
+            style={styles.map}
+            provider={PROVIDER_GOOGLE}
+            initialRegion={{
+              latitude: userLocation.latitude,
+              longitude: userLocation.longitude,
+              latitudeDelta: 0.02,
+              longitudeDelta: 0.02,
+            }}
+          >
             <Marker
-              key={parqueadero.id}
-              coordinate={{ latitude: parqueadero.latitude, longitude: parqueadero.longitude }}
-              title={parqueadero.title}
-              description={parqueadero.description}
-              onPress={() => handleMarkerPress(parqueadero)}
+              coordinate={{ latitude: userLocation.latitude, longitude: userLocation.longitude }}
+              title="Tu ubicación"
+              pinColor="blue"
             />
-          ))}
-        </MapView>
-      )}
+            {parqueaderos.map((parqueadero) => (
+              <Marker
+                key={parqueadero.id}
+                coordinate={{ latitude: parqueadero.latitude, longitude: parqueadero.longitude }}
+                title={parqueadero.title}
+                description={parqueadero.description}
+                onPress={() => handleMarkerPress(parqueadero)}
+              />
+            ))}
+          </MapView>
+        )}
 
-      <RNModal isVisible={modalVisible}>
-        <View style={styles.modalContent}>
-          <Text style={styles.modalTitle}>Crear Reserva</Text>
-          <TextInput placeholder="Nombre Cliente" style={styles.input} />
-          <TextInput placeholder="Matrícula Vehículo" style={styles.input} />
-          <TextInput placeholder="ID Agencia" value={selectedParqueadero ? selectedParqueadero.title : ''} style={styles.input} />
-          <TextInput placeholder="Fecha Inicio (YYYY-MM-DD)" value={fechaInicio} onChangeText={setFechaInicio} style={styles.input} />
-          <TextInput placeholder="Fecha Fin (YYYY-MM-DD)" style={styles.input} />
-          <TouchableOpacity style={styles.reserveButton} onPress={handleReserva}>
-            <Text style={styles.reserveButtonText}>Reservar</Text>
-          </TouchableOpacity>
-          <Button title="Cancelar" onPress={() => setModalVisible(false)} />
-        </View>
-      </RNModal>
-    </ScrollView>
+        <RNModal isVisible={modalVisible}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Crear Reserva</Text>
+            <TextInput placeholder="Nombre Cliente" style={styles.input} />
+            <TextInput placeholder="Matrícula Vehículo" style={styles.input} />
+            <TextInput placeholder="ID Agencia" value={selectedParqueadero ? selectedParqueadero.title : ''} style={styles.input} />
+            <TextInput placeholder="Fecha Inicio (YYYY-MM-DD)" value={fechaInicio} onChangeText={setFechaInicio} style={styles.input} />
+            <TextInput placeholder="Fecha Fin (YYYY-MM-DD)" style={styles.input} />
+            <TouchableOpacity style={styles.reserveButton} onPress={handleReserva}>
+              <Text style={styles.reserveButtonText}>Reservar</Text>
+            </TouchableOpacity>
+            <Button title="Cancelar" onPress={() => setModalVisible(false)} />
+          </View>
+        </RNModal>
+      </ScrollView>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
   container: {
     flexGrow: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#f9f9f9',
     paddingHorizontal: 20,
     paddingVertical: 20,
   },
   header: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
     marginTop: 20,
     marginBottom: 10,
-    color: '#333',
+    color: '#fff',
     textAlign: 'center',
   },
   map: {
@@ -133,7 +138,7 @@ const styles = StyleSheet.create({
     padding: 22,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 4,
+    borderRadius: 10,
     borderColor: 'rgba(0, 0, 0, 0.1)',
   },
   modalTitle: {
