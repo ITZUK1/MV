@@ -64,7 +64,7 @@ const App = () => {
                         <Text>{item.nombre} {item.primer_apellido} {item.segundo_apellido}</Text>
                         <Text>{item.dni}</Text>
                         <Text>{item.calle}, {item.numero}</Text>
-                        <Text>{item.contraseña}</Text>
+                        <Text>{'*'.repeat(item.contraseña.length)}</Text>
                         <View style={styles.buttonContainer}>
                             <Button title="Perfil" onPress={() => handleViewProfile(item)} />
                             <Button title="Editar" onPress={() => handleEdit(item)} />
@@ -89,7 +89,7 @@ const App = () => {
                                 <Text><Text style={styles.perfilLabel}>Nombre:</Text> {selectedCliente.nombre} {selectedCliente.primer_apellido} {selectedCliente.segundo_apellido}</Text>
                                 <Text><Text style={styles.perfilLabel}>Cédula:</Text> {selectedCliente.dni}</Text>
                                 <Text><Text style={styles.perfilLabel}>Dirección:</Text> {selectedCliente.calle}, {selectedCliente.numero}</Text>
-                                <Text><Text style={styles.perfilLabel}>Contraseña:</Text> {selectedCliente.contraseña}</Text>
+                                <Text><Text style={styles.perfilLabel}>Contraseña:</Text> {'*'.repeat(selectedCliente.contraseña.length)}</Text>
                             </>
                         )}
                         <Button title="Cerrar Perfil" onPress={() => setPerfilVisible(false)} />
