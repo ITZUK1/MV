@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8f8f8',
   },
   header: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#6A1B9A', // Morado oscuro
     padding: 20,
     borderRadius: 10,
     marginBottom: 20,
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     color: '#333',
     borderBottomWidth: 2,
-    borderBottomColor: '#4CAF50',
+    borderBottomColor: '#6A1B9A', // Morado oscuro
     paddingBottom: 5,
   },
   text: {
@@ -164,5 +164,6 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
 });
+
 
 export default Home;

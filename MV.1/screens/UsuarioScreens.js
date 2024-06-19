@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, FlatList, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Modal } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useClientes } from '../screens/logic/useClientes';
 
@@ -66,9 +66,24 @@ const App = () => {
                         <Text>{item.calle}, {item.numero}</Text>
                         <Text>{'*'.repeat(item.contraseña.length)}</Text>
                         <View style={styles.buttonContainer}>
-                            <Button title="Perfil" onPress={() => handleViewProfile(item)} />
-                            <Button title="Editar" onPress={() => handleEdit(item)} />
-                            <Button title="Eliminar" onPress={() => handleDelete(item.id_cliente)} />
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={() => handleViewProfile(item)}
+                            >
+                                <Text style={styles.buttonText}>Perfil</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={() => handleEdit(item)}
+                            >
+                                <Text style={styles.buttonText}>Editar</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={() => handleDelete(item.id_cliente)}
+                            >
+                                <Text style={styles.buttonText}>Eliminar</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 )}
@@ -92,7 +107,12 @@ const App = () => {
                                 <Text><Text style={styles.perfilLabel}>Contraseña:</Text> {'*'.repeat(selectedCliente.contraseña.length)}</Text>
                             </>
                         )}
-                        <Button title="Cerrar Perfil" onPress={() => setPerfilVisible(false)} />
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={() => setPerfilVisible(false)}
+                        >
+                            <Text style={styles.buttonText}>Cerrar Perfil</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Modal>
@@ -159,15 +179,18 @@ const App = () => {
                             onChangeText={(text) => handleChange('contraseña', text)}
                             secureTextEntry
                         />
-                        <Button
-                            title={editing ? "Actualizar Cliente" : "Guardar Cliente"}
+                        <TouchableOpacity
+                            style={[styles.button, { backgroundColor: '#6A1B9A' }]} // Morado oscuro
                             onPress={handleSaveCliente}
-                        />
-                        <Button
-                            title="Cancelar"
-                            color="red"
+                        >
+                            <Text style={styles.buttonText}>{editing ? "Actualizar Cliente" : "Guardar Cliente"}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.button, { backgroundColor: 'red' }]} // Color rojo para cancelar
                             onPress={() => setModalVisible(false)}
-                        />
+                        >
+                            <Text style={styles.buttonText}>Cancelar</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Modal>
@@ -186,7 +209,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 20,
         textAlign: 'center',
-        color: '#333',
+        color: '#6A1B9A', // Morado oscuro
     },
     input: {
         borderWidth: 1,
@@ -219,7 +242,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     addButton: {
-        backgroundColor: '#007bff',
+        backgroundColor: '#6A1B9A', // Morado oscuro
         padding: 10,
         borderRadius: 10,
         marginBottom: 20,
@@ -253,11 +276,23 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 20,
+        color: '#6A1B9A', // Morado oscuro
     },
     picker: {
         height: 50,
         width: '100%',
         marginBottom: 10,
+    },
+    button: {
+        backgroundColor: '#6A1B9A', // Morado oscuro
+        padding: 10,
+        borderRadius: 10,
+        marginBottom: 10,
+        alignItems: 'center',
+    },
+    buttonText: {
+        color: '#fff',
+        fontSize: 16,
     },
 });
 
