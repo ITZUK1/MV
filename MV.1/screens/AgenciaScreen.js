@@ -86,9 +86,6 @@ const AgenciaScreen = () => {
                 <TouchableOpacity style={[styles.navButton, view === 'list' && styles.activeNavButton]} onPress={() => setView('list')}>
                     <Text style={styles.navButtonText}>Ver Agencias</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.navButton} onPress={fetchSedes}>
-                    <Text style={styles.navButtonText}>Actualizar Lista</Text>
-                </TouchableOpacity>
             </View>
             {view === 'form' ? renderForm() : renderList()}
             {selectedSede && view === 'form' && (
@@ -136,10 +133,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         marginHorizontal: 5,
-        backgroundColor: '#3498db',
+        backgroundColor: '#6A1B9A', // Cambiado a morado oscuro
     },
     activeNavButton: {
-        backgroundColor: '#2980b9',
+        backgroundColor: '#5A1A88', // Cambiado a morado oscuro más oscuro
     },
     navButtonText: {
         color: '#fff',
@@ -171,7 +168,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 5,
     },
     confirmButton: {
-        backgroundColor: '#2ecc71',
+        backgroundColor: '#6A1B9A', // Cambiado a morado oscuro
     },
     deleteButton: {
         backgroundColor: '#e74c3c',
