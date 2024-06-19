@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, ScrollView, Button } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import RNModal from 'react-native-modal';
+import * as Location from 'expo-location';
 
 const MotoScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedParqueadero, setSelectedParqueadero] = useState(null);
   const [fechaInicio, setFechaInicio] = useState(new Date().toISOString().split('T')[0]);
+  const [userLocation, setUserLocation] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        Alert.alert('Permiso denegado', 'Permiso para acceder a la ubicación ha sido denegado');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setUserLocation(location.coords);
+    })();
+  }, []);
 
   const parqueaderos = [
     { id: 2, latitude: 4.636194, longitude: -74.098059, title: 'Parqueadero Motos y Carros', description: 'Parqueadero en la zona de Usme' },
@@ -28,7 +43,7 @@ const MotoScreen = () => {
     { id: 19, latitude: 4.521372381298283, longitude: -74.12404925014094, title: 'Nuevo Parqueadero 15', description: 'Descripción del nuevo parqueadero 15' },
     { id: 20, latitude: 4.523360815140545, longitude: -74.11985315114079, title: 'Nuevo Parqueadero 16', description: 'Descripción del nuevo parqueadero 16' },
     { id: 21, latitude: 4.521843244292218, longitude: -74.11945693308323, title: 'Nuevo Parqueadero 17', description: 'Descripción del nuevo parqueadero 17' },
-  ]
+  ];
 
   const handleMarkerPress = (parqueadero) => {
     setSelectedParqueadero(parqueadero);
@@ -43,27 +58,34 @@ const MotoScreen = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.header}>Reserva tu nueva aventura</Text>
-      
-      <MapView
-        style={styles.map}
-        provider={PROVIDER_GOOGLE}
-        initialRegion={{
-          latitude: 4.499890,
-          longitude: -74.123456,
-          latitudeDelta: 0.02,
-          longitudeDelta: 0.02,
-        }}
-      >
-        {parqueaderos.map((parqueadero) => (
+
+      {userLocation && (
+        <MapView
+          style={styles.map}
+          provider={PROVIDER_GOOGLE}
+          initialRegion={{
+            latitude: userLocation.latitude,
+            longitude: userLocation.longitude,
+            latitudeDelta: 0.02,
+            longitudeDelta: 0.02,
+          }}
+        >
           <Marker
-            key={parqueadero.id}
-            coordinate={{ latitude: parqueadero.latitude, longitude: parqueadero.longitude }}
-            title={parqueadero.title}
-            description={parqueadero.description}
-            onPress={() => handleMarkerPress(parqueadero)}
+            coordinate={{ latitude: userLocation.latitude, longitude: userLocation.longitude }}
+            title="Tu ubicación"
+            pinColor="blue"
           />
-        ))}
-      </MapView>
+          {parqueaderos.map((parqueadero) => (
+            <Marker
+              key={parqueadero.id}
+              coordinate={{ latitude: parqueadero.latitude, longitude: parqueadero.longitude }}
+              title={parqueadero.title}
+              description={parqueadero.description}
+              onPress={() => handleMarkerPress(parqueadero)}
+            />
+          ))}
+        </MapView>
+      )}
 
       <RNModal isVisible={modalVisible}>
         <View style={styles.modalContent}>
@@ -136,7 +158,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   reserveButtonText: {
-    color: '#fff',
+    color: 'white',
+    fontWeight: 'bold',
     fontSize: 16,
   },
 });
