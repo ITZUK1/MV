@@ -73,16 +73,29 @@ const App = () => {
                     </View>
                 )}
             />
-            {perfilVisible && selectedCliente && (
-                <View style={styles.perfil}>
-                    <Text style={styles.perfilHeading}>Perfil del Cliente</Text>
-                    <Text><Text style={styles.perfilLabel}>Nombre:</Text> {selectedCliente.nombre} {selectedCliente.primer_apellido} {selectedCliente.segundo_apellido}</Text>
-                    <Text><Text style={styles.perfilLabel}>Cédula:</Text> {selectedCliente.dni}</Text>
-                    <Text><Text style={styles.perfilLabel}>Dirección:</Text> {selectedCliente.calle}, {selectedCliente.numero}</Text>
-                    <Text><Text style={styles.perfilLabel}>Contraseña:</Text> {selectedCliente.contraseña}</Text>
-                    <Button title="Cerrar Perfil" onPress={() => setPerfilVisible(false)} />
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={perfilVisible}
+                onRequestClose={() => {
+                    setPerfilVisible(false);
+                }}
+            >
+                <View style={styles.modalOverlay}>
+                    <View style={styles.modalContent}>
+                        <Text style={styles.modalHeading}>Perfil del Cliente</Text>
+                        {selectedCliente && (
+                            <>
+                                <Text><Text style={styles.perfilLabel}>Nombre:</Text> {selectedCliente.nombre} {selectedCliente.primer_apellido} {selectedCliente.segundo_apellido}</Text>
+                                <Text><Text style={styles.perfilLabel}>Cédula:</Text> {selectedCliente.dni}</Text>
+                                <Text><Text style={styles.perfilLabel}>Dirección:</Text> {selectedCliente.calle}, {selectedCliente.numero}</Text>
+                                <Text><Text style={styles.perfilLabel}>Contraseña:</Text> {selectedCliente.contraseña}</Text>
+                            </>
+                        )}
+                        <Button title="Cerrar Perfil" onPress={() => setPerfilVisible(false)} />
+                    </View>
                 </View>
-            )}
+            </Modal>
             <Modal
                 animationType="slide"
                 transparent={true}
@@ -215,23 +228,6 @@ const styles = StyleSheet.create({
     addButtonText: {
         color: '#fff',
         fontSize: 16,
-    },
-    perfil: {
-        padding: 20,
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        elevation: 5,  // Adds shadow for Android
-        shadowColor: '#000',  // Adds shadow for iOS
-        shadowOffset: { width: 0, height: 2 },  // Adds shadow for iOS
-        shadowOpacity: 0.2,  // Adds shadow for iOS
-        shadowRadius: 2,  // Adds shadow for iOS
-        marginVertical: 10,
-    },
-    perfilHeading: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 10,
-        textAlign: 'center',
     },
     perfilLabel: {
         fontWeight: 'bold',
