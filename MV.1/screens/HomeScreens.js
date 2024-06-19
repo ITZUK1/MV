@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, Image } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
+import * as Location from 'expo-location';
 
 const parqueaderos = [
   { 
@@ -11,7 +12,6 @@ const parqueaderos = [
     imagen: require('./img/parqueadero2.jpg'),
     descripcion: 'Parqueadero junior  - Ubicado en la calle 84 sur no 14-55. Teléfono: +573006929521. Horario: 24/7'
   },
-  
 ];
 
 const ubicacionesParqueaderos = [
@@ -22,6 +22,22 @@ const ubicacionesParqueaderos = [
 ];
 
 const Home = () => {
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location.coords);
+    })();
+  }, []);
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
@@ -45,24 +61,32 @@ const Home = () => {
       ))}
 
       <Text style={styles.sectionTitle}>Ubicación</Text>
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: 4.481680,  // Coordenadas centrales de Usme, Bogotá
-          longitude: -74.124230,
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.01,
-        }}
-      >
-        {ubicacionesParqueaderos.map((parqueadero, index) => (
+      {errorMsg && <Text>{errorMsg}</Text>}
+      {location && (
+        <MapView
+          style={styles.map}
+          initialRegion={{
+            latitude: location.latitude,
+            longitude: location.longitude,
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
+          }}
+        >
           <Marker
-            key={index}
-            coordinate={{ latitude: parqueadero.latitude, longitude: parqueadero.longitude }}
-            title={parqueadero.title}
-            description={parqueadero.description}
+            coordinate={{ latitude: location.latitude, longitude: location.longitude }}
+            title="Mi Ubicación"
+            description="Estás aquí"
           />
-        ))}
-      </MapView>
+          {ubicacionesParqueaderos.map((parqueadero, index) => (
+            <Marker
+              key={index}
+              coordinate={{ latitude: parqueadero.latitude, longitude: parqueadero.longitude }}
+              title={parqueadero.title}
+              description={parqueadero.description}
+            />
+          ))}
+        </MapView>
+      )}
     </ScrollView>
   );
 };
