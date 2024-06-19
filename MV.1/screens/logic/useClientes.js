@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Alert } from 'react-native';
 
-const serverUrl = 'http://192.168.0.105:3000';
+const serverUrl = 'http://192.168.1.7:3000';
 
 export const useClientes = () => {
     const [clientes, setClientes] = useState([]);
