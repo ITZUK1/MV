@@ -12,8 +12,7 @@ const LoginScreen = ({ onLogin }) => {
     const [segundoApellido, setSegundoApellido] = useState('');
     const [calle, setCalle] = useState('');
     const [numero, setNumero] = useState('');
-    const [telefono, setTelefono] = useState(''); // Este campo ya no se usa
-    const [ciudad, setCiudad] = useState('');
+    const [ciudad, setCiudad] = useState('1'); // Asignar el ID de Bogotá por defecto
 
     const handleLogin = () => {
         // Lógica de autenticación aquí
@@ -70,7 +69,7 @@ const LoginScreen = ({ onLogin }) => {
                 <>
                     <TextInput
                         style={styles.input}
-                        placeholder="DNI"
+                        placeholder="Cedula"
                         value={dni}
                         onChangeText={setDni}
                     />
@@ -111,11 +110,13 @@ const LoginScreen = ({ onLogin }) => {
                         onChangeText={setPassword}
                         secureTextEntry
                     />
+                    {/* Input de la ciudad deshabilitado, con valor predeterminado de Bogotá */}
                     <TextInput
                         style={styles.input}
                         placeholder="Ciudad"
-                        value={ciudad}
-                        onChangeText={setCiudad}
+                        value="Bogotá"
+                        editable={false}
+                        selectTextOnFocus={false}
                     />
                 </>
             )}
