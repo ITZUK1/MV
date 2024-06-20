@@ -5,6 +5,8 @@ const db = require('./config/db');
 const clienteRoutes = require('./routes/clienteRoutes');
 const agenciaRoutes = require('./routes/agenciaRoutes');
 const reservaRoutes = require('./routes/reservaRoutes');
+const login = require('./routes/login');
+
 
 
 const app = express();
@@ -16,6 +18,8 @@ app.use(bodyParser.json());
 app.use('/cliente', clienteRoutes);
 app.use('/agencia', agenciaRoutes);
 app.use('/reserva', reservaRoutes);
+app.use('/login', login);
+
 
 
 app.listen(port, () => {
