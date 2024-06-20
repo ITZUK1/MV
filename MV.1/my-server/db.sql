@@ -1,6 +1,6 @@
 -- Creación de la base de datos
-CREATE DATABASE MotoCompeticion;
-USE MotoCompeticion;
+CREATE DATABASE PARKIANDO;
+USE PARKIANDO;
 
 -- Tabla de Ciudades
 CREATE TABLE Ciudad (
