@@ -35,27 +35,7 @@ const App = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.heading}>REGISTRO</Text>
-            <TouchableOpacity
-                style={styles.addButton}
-                onPress={() => {
-                    setForm({
-                        dni: '',
-                        nombre: '',
-                        primer_apellido: '',
-                        segundo_apellido: '',
-                        calle: '',
-                        numero: '',
-                        id_ciudad: '',
-                        contraseña: '',
-                    });
-                    setEditing(false);
-                    setModalVisible(true);
-                    setPerfilVisible(false);
-                }}
-            >
-                <Text style={styles.addButtonText}>Añadir Cliente</Text>
-            </TouchableOpacity>
+            <Text style={styles.heading}>PERFIL</Text>
             <FlatList
                 data={clientes}
                 keyExtractor={(item) => item.id_cliente.toString()}
@@ -240,17 +220,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginTop: 10,
-    },
-    addButton: {
-        backgroundColor: '#6A1B9A', // Morado oscuro
-        padding: 10,
-        borderRadius: 10,
-        marginBottom: 20,
-        alignItems: 'center',
-    },
-    addButtonText: {
-        color: '#fff',
-        fontSize: 16,
     },
     perfilLabel: {
         fontWeight: 'bold',
