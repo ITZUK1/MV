@@ -12,7 +12,7 @@ const LoginScreen = ({ onLogin }) => {
     const [segundoApellido, setSegundoApellido] = useState('');
     const [calle, setCalle] = useState('');
     const [numero, setNumero] = useState('');
-    const [telefono, setTelefono] = useState('');
+    const [telefono, setTelefono] = useState(''); // Este campo ya no se usa
     const [ciudad, setCiudad] = useState('');
 
     const handleLogin = () => {
@@ -29,7 +29,7 @@ const LoginScreen = ({ onLogin }) => {
                 calle,
                 numero,
                 id_ciudad: ciudad,
-                contraseña: password,
+                contraseña: password, // Usamos el estado de 'password' para el campo de contraseña
             });
             console.log('Registro exitoso:', response.data);
             alert('Cliente registrado correctamente');
@@ -106,9 +106,10 @@ const LoginScreen = ({ onLogin }) => {
                     />
                     <TextInput
                         style={styles.input}
-                        placeholder="Teléfono"
-                        value={telefono}
-                        onChangeText={setTelefono}
+                        placeholder="Contraseña"
+                        value={password}
+                        onChangeText={setPassword}
+                        secureTextEntry
                     />
                     <TextInput
                         style={styles.input}
