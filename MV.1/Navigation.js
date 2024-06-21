@@ -3,10 +3,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons';
 
-import HomeScreens from "./screens/HomeScreens";
-import UsuarioScreens from "./screens/UsuarioScreens";
-import AgenciaScreens from "./screens/AgenciaScreen";
-import ReservaScreens from "./screens/reserva";
+import HomeScreens from "./Parkiando/Pantallas/Home";
+import UsuarioScreens from "./Parkiando/Pantallas/Cliente";
+import AgenciaScreens from "./Parkiando/Pantallas/Agencia";
+import ReservaScreens from "./Parkiando/Pantallas/Reserva";
 
 const Tab = createBottomTabNavigator();
 

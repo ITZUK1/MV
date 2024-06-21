@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, Image } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
+import styles from '../GlobalStyles/HomeStyles';
 
 const parqueaderos = [
   { 
-    imagen: require('./img/paqueadero1.jpg'),
+    imagen: require('../../assets/parqueadero1.jpg'),
     descripcion: 'Parqueadero carros y motos - Ubicado en la Calle 76sur 1262 barrio Andrea. Teléfono: +573115510800. Administrador: Adriana gilen  Horario: Lunes a domingo de 5:30 am a 9:30 PM.'
   },
   { 
-    imagen: require('./img/parqueadero2.jpg'),
+    imagen: require('../../assets/parqueadero2.jpg'),
     descripcion: 'Parqueadero junior  - Ubicado en la calle 84 sur no 14-55. Teléfono: +573006929521. Horario: 24/7'
   },
 ];
@@ -91,79 +92,4 @@ const Home = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#f8f8f8',
-  },
-  header: {
-    backgroundColor: '#6A1B9A', // Morado oscuro
-    padding: 20,
-    borderRadius: 10,
-    marginBottom: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    elevation: 5,
-  },
-  welcome: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#fff',
-    textAlign: 'center',
-  },
-  intro: {
-    fontSize: 16,
-    color: '#fff',
-    textAlign: 'center',
-    marginTop: 10,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginVertical: 10,
-    color: '#333',
-    borderBottomWidth: 2,
-    borderBottomColor: '#6A1B9A', // Morado oscuro
-    paddingBottom: 5,
-  },
-  text: {
-    fontSize: 16,
-    color: '#666',
-    marginBottom: 20,
-    lineHeight: 24,
-  },
-  card: {
-    backgroundColor: '#fff',
-    padding: 15,
-    borderRadius: 10,
-    marginVertical: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 3,
-  },
-  cardImage: {
-    width: '100%',
-    height: 200,
-    resizeMode: 'cover',
-    borderRadius: 10,
-    marginBottom: 10,
-  },
-  cardDescription: {
-    fontSize: 16,
-    color: '#555',
-  },
-  map: {
-    width: '100%',
-    height: 300,
-    borderRadius: 10,
-    marginVertical: 20,
-  },
-});
-
-
-export default Home;
+export default Home; 

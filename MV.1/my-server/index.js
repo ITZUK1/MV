@@ -2,10 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const db = require('./config/db');
-const clienteRoutes = require('./routes/clienteRoutes');
-const agenciaRoutes = require('./routes/agenciaRoutes');
-const reservaRoutes = require('./routes/reservaRoutes');
-const login = require('./routes/login');
+const ClienteRoutes = require('./routes/ClienteRoutes');
+const AgenciaRoutes = require('./routes/AgenciaRoutes');
+const ReservaRoutes = require('./routes/ReservaRoutes');
+const LoginRoutes = require('./routes/LoginRoutes');
 
 
 
@@ -15,10 +15,10 @@ const port = 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/cliente', clienteRoutes);
-app.use('/agencia', agenciaRoutes);
-app.use('/reserva', reservaRoutes);
-app.use('/login', login);
+app.use('/Cliente', ClienteRoutes);
+app.use('/Agencia', AgenciaRoutes);
+app.use('/Reserva', ReservaRoutes);
+app.use('/Login', LoginRoutes);
 
 
 
