@@ -77,5 +77,5 @@ CREATE TABLE Reserva (
 );
 
 
-use motocompeticion;
+use PARKIANDO;
 ALTER TABLE Cliente CHANGE COLUMN telefono contraseña VARCHAR(255) NOT NULL;
