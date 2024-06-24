@@ -30,8 +30,27 @@ const MotoScreen = () => {
 
   const parqueaderos = [
     { id: 2, latitude: 4.636194, longitude: -74.098059, title: 'Parqueadero Motos y Carros', description: 'Parqueadero en la zona de Usme' },
-    // Agrega los otros parqueaderos aquí
-  ];
+    { id: 4, latitude: 4.478870, longitude: -74.122490, title: 'Parqueadero Usme 4', description: 'Parqueadero en la zona de Usme' },
+    { id: 5, latitude: 4.513140687036615, longitude: -74.1152407233761, title: 'Nuevo Parqueadero 1', description: 'Descripción del nuevo parqueadero 1' },
+    { id: 6, latitude: 4.509095076672661, longitude: -74.11546468783, title: 'Nuevo Parqueadero 2', description: 'Descripción del nuevo parqueadero 2' },
+    { id: 7, latitude: 4.507298208810172, longitude: -74.11419868510754, title: 'Nuevo Parqueadero 3', description: 'Descripción del nuevo parqueadero 3' },
+    { id: 8, latitude: 4.497589925191344, longitude: -74.10693771633768, title: 'Nuevo Parqueadero 4', description: 'Descripción del nuevo parqueadero 4' },
+    { id: 9, latitude: 4.497934752065181, longitude: -74.10678398652774, title: 'Nuevo Parqueadero 5', description: 'Descripción del nuevo parqueadero 5' },
+    { id: 10, latitude: 4.5023781907080185, longitude: -74.1061078501598, title: 'Nuevo Parqueadero 6', description: 'Descripción del nuevo parqueadero 6' },
+    { id: 11, latitude: 4.502100101740342, longitude: -74.10692324165689, title: 'Nuevo Parqueadero 7', description: 'Descripción del nuevo parqueadero 7' },
+    { id: 12, latitude: 4.508232741083661, longitude: -74.1193445032203, title: 'Nuevo Parqueadero 8', description: 'Descripción del nuevo parqueadero 8' },
+    { id: 13, latitude: 4.517025857613381, longitude: -74.12418571348256, title: 'Nuevo Parqueadero 9', description: 'Descripción del nuevo parqueadero 9' },
+    { id: 14, latitude: 4.519708973584316, longitude: -74.11688026600258, title: 'Nuevo Parqueadero 10', description: 'Descripción del nuevo parqueadero 10' },
+    { id: 15, latitude: 4.519969587859241, longitude: -74.11863316270434, title: 'Nuevo Parqueadero 11', description: 'Descripción del nuevo parqueadero 11' },
+    { id: 16, latitude: 4.52197345324146, longitude: -74.119312257305, title: 'Nuevo Parqueadero 12', description: 'Descripción del nuevo parqueadero 12' },
+    { id: 17, latitude: 4.520484094404108, longitude: -74.12352264305774, title: 'Nuevo Parqueadero 13', description: 'Descripción del nuevo parqueadero 13' },
+    { id: 18, latitude: 4.521729740186653, longitude: -74.12403875485968, title: 'Nuevo Parqueadero 14', description: 'Descripción del nuevo parqueadero 14' },
+    { id: 19, latitude: 4.521372381298283, longitude: -74.12404925014094, title: 'Nuevo Parqueadero 15', description: 'Descripción del nuevo parqueadero 15' },
+    { id: 20, latitude: 4.523360815140545, longitude: -74.11985315114079, title: 'Nuevo Parqueadero 16', description: 'Descripción del nuevo parqueadero 16' },
+    { id: 21, latitude: 4.521843244292218, longitude: -74.11945693308323, title: 'Nuevo Parqueadero 17', description: 'Descripción del nuevo parqueadero 17' },
+];
+
+
 
   const handleMarkerPress = (parqueadero) => {
     setSelectedParqueadero(parqueadero);
