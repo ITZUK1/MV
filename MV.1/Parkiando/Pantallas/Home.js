@@ -44,7 +44,7 @@ const Home = () => {
       <View style={styles.header}>
         <Text style={styles.welcome}>Bienvenido a PARKI ANDO</Text>
         <Text style={styles.intro}>
-          Gestiona tus reservas de parqueaderos en la zona de Usme, Bogotá, con nuestra aplicación.
+          Gestiona tus reservas de parqueaderos en la zona de Usme, Bogotá, con nuestra aplicación facil y a tu mano 
         </Text>
       </View>
       
