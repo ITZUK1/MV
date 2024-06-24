@@ -23,7 +23,7 @@ function MyTabs() {
                         case 'Usuario':
                             iconName = focused ? 'person' : 'person-outline';
                             break;
-                        case 'Agencia':
+                        case 'Calificación y Comentarios':
                             iconName = focused ? 'business' : 'business-outline';
                             break;
                         case 'Reserva':
@@ -50,7 +50,7 @@ function MyTabs() {
         >
             <Tab.Screen name="Home" component={HomeScreens} options={{ tabBarLabel: 'Inicio' }} />
             <Tab.Screen name="Usuario" component={UsuarioScreens} options={{ tabBarLabel: 'Usuario' }} />
-            <Tab.Screen name="Agencia" component={AgenciaScreens} options={{ tabBarLabel: 'Agencia' }} />
+            <Tab.Screen name="Calificación y Comentarios" component={AgenciaScreens} options={{ tabBarLabel: 'Calificación y Comentarios' }} />
             <Tab.Screen name="Reserva" component={ReservaScreens} options={{ tabBarLabel: 'Reservas' }} />
         </Tab.Navigator>
     );

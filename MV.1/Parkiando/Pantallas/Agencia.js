@@ -14,12 +14,12 @@ const parqueaderos = [
     nombre: 'Parqueadero junior'
   },
   { 
-    imagen: require('../../assets/parqueadero1.jpg'),
-    nombre: 'Parqueadero carros y motos'
+    imagen: require('../../assets/parqueadero3.jpg'),
+    nombre: 'parqueadero puente de comuneros'
   },
   { 
-    imagen: require('../../assets/parqueadero2.jpg'),
-    nombre: 'Parqueadero junior'
+    imagen: require('../../assets/parqueadero4.jpg'),
+    nombre: 'Parqueadero las 24/7'
   },
 ];
 
