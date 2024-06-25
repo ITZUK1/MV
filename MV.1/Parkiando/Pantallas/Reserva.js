@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, ScrollView, Button, ImageBackground } from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from 'react-native-maps';
 import RNModal from 'react-native-modal';
 import * as Location from 'expo-location';
 import axios from 'axios';
@@ -10,10 +10,11 @@ const MotoScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedParqueadero, setSelectedParqueadero] = useState(null);
   const [fechaInicio, setFechaInicio] = useState(new Date().toISOString().split('T')[0]);
-  const [fechaFin, setFechaFin] = useState(new Date().toISOString().split('T')[0]);  // Añadido para fecha fin
+  const [fechaFin, setFechaFin] = useState(new Date().toISOString().split('T')[0]);
   const [nombreCliente, setNombreCliente] = useState('');
   const [matriculaVehiculo, setMatriculaVehiculo] = useState('');
   const [userLocation, setUserLocation] = useState(null);
+  const [routeCoords, setRouteCoords] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -24,7 +25,10 @@ const MotoScreen = () => {
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      setUserLocation(location.coords);
+      setUserLocation({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      });
     })();
   }, []);
 
@@ -50,11 +54,28 @@ const MotoScreen = () => {
     { id: 21, latitude: 4.521843244292218, longitude: -74.11945693308323, title: 'Nuevo Parqueadero 17', description: 'Descripción del nuevo parqueadero 17' },
 ];
 
-
-
   const handleMarkerPress = (parqueadero) => {
     setSelectedParqueadero(parqueadero);
     setModalVisible(true);
+    fetchRoute(parqueadero);
+  };
+
+  const fetchRoute = async (parqueadero) => {
+    if (!userLocation) return;
+
+    const start = `${userLocation.longitude},${userLocation.latitude}`;
+    const end = `${parqueadero.longitude},${parqueadero.latitude}`;
+
+    try {
+      const response = await axios.get(`http://router.project-osrm.org/route/v1/driving/${start};${end}?overview=full&geometries=geojson`);
+      const coords = response.data.routes[0].geometry.coordinates.map(coord => ({
+        latitude: coord[1],
+        longitude: coord[0]
+      }));
+      setRouteCoords(coords);
+    } catch (error) {
+      console.error('Error fetching route:', error);
+    }
   };
 
   const handleReserva = async () => {
@@ -111,6 +132,14 @@ const MotoScreen = () => {
                 onPress={() => handleMarkerPress(parqueadero)}
               />
             ))}
+
+            {routeCoords.length > 0 && (
+              <Polyline
+                coordinates={routeCoords}
+                strokeColor="hotpink"
+                strokeWidth={3}
+              />
+            )}
           </MapView>
         )}
 
