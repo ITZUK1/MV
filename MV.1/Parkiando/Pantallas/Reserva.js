@@ -8,6 +8,7 @@ import styles from '../GlobalStyles/ReservaStyles';
 
 const MotoScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [historialVisible, setHistorialVisible] = useState(false); // Estado para el historial de reservas
   const [selectedParqueadero, setSelectedParqueadero] = useState(null);
   const [fechaInicio, setFechaInicio] = useState(new Date().toISOString().split('T')[0]);
   const [fechaFin, setFechaFin] = useState(new Date().toISOString().split('T')[0]);
@@ -15,6 +16,7 @@ const MotoScreen = () => {
   const [matriculaVehiculo, setMatriculaVehiculo] = useState('');
   const [userLocation, setUserLocation] = useState(null);
   const [routeCoords, setRouteCoords] = useState([]);
+  const [reservas, setReservas] = useState([]); // Estado para almacenar las reservas
 
   useEffect(() => {
     (async () => {
@@ -102,6 +104,16 @@ const MotoScreen = () => {
     }
   };
 
+  const fetchReservas = async () => {
+    try {
+      const response = await axios.get('http://192.168.1.7:3000/Reserva'); // Ajusta la URL según sea necesario
+      setReservas(response.data);
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Error', 'Hubo un error al obtener las reservas');
+    }
+  };
+
   return (
     <ImageBackground source={require('../../assets/morado.jpg')} style={styles.backgroundImage}>
       <ScrollView contentContainerStyle={styles.container}>
@@ -143,6 +155,8 @@ const MotoScreen = () => {
           </MapView>
         )}
 
+        <Button title="Historial de reservas" onPress={() => { setHistorialVisible(true); fetchReservas(); }} />
+
         <RNModal isVisible={modalVisible}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>Crear Reserva</Text>
@@ -180,6 +194,24 @@ const MotoScreen = () => {
               <Text style={styles.reserveButtonText}>Reservar</Text>
             </TouchableOpacity>
             <Button title="Cancelar" onPress={() => setModalVisible(false)} />
+          </View>
+        </RNModal>
+
+        <RNModal isVisible={historialVisible}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Historial de Reservas</Text>
+            <ScrollView>
+              {reservas.map((reserva, index) => (
+                <View key={index} style={styles.reservaItem}>
+                  <Text>Cliente: {reserva.id_cliente}</Text>
+                  <Text>Vehículo: {reserva.matricula_vehiculo}</Text>
+                  <Text>Parqueadero: {reserva.nombre_parking}</Text>
+                  <Text>Inicio: {reserva.fecha_inicio}</Text>
+                  <Text>Fin: {reserva.fecha_fin}</Text>
+                </View>
+              ))}
+            </ScrollView>
+            <Button title="Cerrar" onPress={() => setHistorialVisible(false)} />
           </View>
         </RNModal>
       </ScrollView>
