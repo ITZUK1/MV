@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
+const { enviarCorreoReserva } = require('../config/emailconfig'); // Importa la función de envío de correos
 
 // CREATE - Agregar una nueva reserva
 router.post('/', (req, res) => {
@@ -11,6 +12,10 @@ router.post('/', (req, res) => {
         if (err) {
             return res.status(500).send(err);
         }
+
+        const nuevaReserva = { id_cliente, matricula_vehiculo, nombre_parking, fecha_inicio, fecha_fin };
+        enviarCorreoReserva(nuevaReserva); // Envía el correo
+
         res.send('Reserva creada correctamente');
     });
 });
